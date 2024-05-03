@@ -1,20 +1,76 @@
 package com.example.order
 
 import io.kotest.core.spec.style.FeatureSpec
+import io.kotest.matchers.shouldBe
+import java.math.BigDecimal
+
+class Order(val orderItems: List<OrderItem>) {
+    companion object {
+        fun request(orderItems: List<OrderItem>): Order {
+            return Order(orderItems)
+        }
+    }
+
+    fun retrieveQuantity(id: Long) {
+        this.orderItems.first { id == it.id }
+            .quantity
+    }
+
+    fun totalQuantity(): Long {
+        return this.orderItems.sumOf { orderItem -> orderItem.quantity }
+    }
+}
+
+class AuthService(
+    private val authApi: AuthApi,
+) {
+    fun getUserId(token: String) = authApi.getUserId(token)
+}
+
+interface AuthApi {
+    fun getUserId(token: String): Long
+}
+
+class AuthFakeApi : AuthApi {
+    override fun getUserId(token: String): Long {
+        return 1
+    }
+}
+
+class OrderItem(
+    val id: Long,
+    val productName: String,
+    val productPrice: BigDecimal,
+    val quantity: Long,
+)
 
 class OrderSteps : FeatureSpec({
 
     feature("주문 준비 스텝") {
-        scenario("손님이 점원에게 옷을 주문을 요청한다") {
-            // 주문 요청이 제대로 접수되었는지 확인
-        }
-
         scenario("점원이 관리자에게 주문을 요청한다") {
-            // 관리자에게 주문 요청 전달 확인
+            // Given
+            val orderItems =
+                listOf(
+                    OrderItem(1L, "조던 덩크 하이", BigDecimal.valueOf(10_000), quantity = 3),
+                    OrderItem(1L, "아디다스 루이비통 스니커즈", BigDecimal.valueOf(24_000), quantity = 1),
+                )
+
+            // When
+            val sut = Order.request(orderItems)
+
+            // Then
+            sut.totalQuantity() shouldBe 4
         }
 
-        scenario("관리자는 주문을 요청한 사람이 본인인지 확인한다") {
-            // 요청한 손님의 신원을 확인
+        scenario("관리자는 토큰 정보를 통해 손님의 신원을 파악한다") {
+            // Given
+            val token = "user-token"
+
+            // When
+            val userId = AuthService(AuthFakeApi()).getUserId(token)
+
+            // Then
+            userId shouldBe 1L
         }
 
         scenario("관리자는 주문한 물품의 재고가 충분한지 확인한다") {
