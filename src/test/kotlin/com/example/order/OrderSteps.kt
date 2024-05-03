@@ -4,37 +4,42 @@ import io.kotest.core.spec.style.FeatureSpec
 import io.kotest.matchers.shouldBe
 import java.math.BigDecimal
 
-class Order(val orderItems: List<OrderItem>) {
+class Order(private val orderItems: List<OrderItem>) {
     companion object {
-        fun request(orderItems: List<OrderItem>): Order {
-            return Order(orderItems)
-        }
+        fun request(orderItems: List<OrderItem>) = Order(orderItems)
     }
 
-    fun retrieveQuantity(id: Long) {
-        this.orderItems.first { id == it.id }
-            .quantity
-    }
+    fun totalQuantity() = this.orderItems.sumOf { orderItem -> orderItem.quantity }
 
-    fun totalQuantity(): Long {
-        return this.orderItems.sumOf { orderItem -> orderItem.quantity }
-    }
+    fun retrieveQuantity(id: Long) = this.orderItems.first { id == it.id }.quantity
 }
 
 class AuthService(
     private val authApi: AuthApi,
 ) {
-    fun getUserId(token: String) = authApi.getUserId(token)
+    fun getUserId(token: String) = authApi.fetchUserIdBy(token)
 }
 
 interface AuthApi {
-    fun getUserId(token: String): Long
+    fun fetchUserIdBy(token: String): Long
 }
 
 class AuthFakeApi : AuthApi {
-    override fun getUserId(token: String): Long {
-        return 1
-    }
+    override fun fetchUserIdBy(token: String): Long = 1
+}
+
+class ProductService(
+    private val productApi: ProductApi,
+) {
+    fun isProductQuantityEnough(itemId: Long) = productApi.isProductQuantityEnough(itemId)
+}
+
+interface ProductApi {
+    fun isProductQuantityEnough(itemId: Long): Boolean
+}
+
+class ProductFakeApi : ProductApi {
+    override fun isProductQuantityEnough(itemId: Long) = true
 }
 
 class OrderItem(
@@ -43,6 +48,42 @@ class OrderItem(
     val productPrice: BigDecimal,
     val quantity: Long,
 )
+
+data class PhoneNumber(val number: String) {
+    init {
+        require(isValidPhoneNumber(number)) { "Invalid phone number: $number" }
+    }
+
+    companion object {
+        // 한국 휴대폰 번호 형식에 대한 정규식 패턴 (하이픈 없이)
+        private val PHONE_NUMBER_PATTERN = Regex("^01[016789]\\d{7,8}$")
+
+        fun isValidPhoneNumber(number: String): Boolean {
+            return PHONE_NUMBER_PATTERN.matches(number)
+        }
+    }
+
+    override fun toString(): String {
+        // 보기 좋게 하이픈을 추가하여 출력하고 싶은 경우 사용
+        return "${number.substring(0, 3)}-${number.substring(3, number.length - 4)}-${number.takeLast(4)}"
+    }
+}
+
+class DeliveryService(
+    private val deliveryApi: DeliveryApi,
+) {
+    fun isSurChargeArea(postNum: String) = deliveryApi.fetchSurChargeArea().contains(postNum)
+}
+
+interface DeliveryApi {
+    fun fetchSurChargeArea(): List<String>
+}
+
+class DeliveryFakeApi : DeliveryApi {
+    override fun fetchSurChargeArea(): List<String> {
+        return listOf("363")
+    }
+}
 
 class OrderSteps : FeatureSpec({
 
@@ -56,10 +97,10 @@ class OrderSteps : FeatureSpec({
                 )
 
             // When
-            val sut = Order.request(orderItems)
+            val requestOrder = Order.request(orderItems)
 
             // Then
-            sut.totalQuantity() shouldBe 4
+            requestOrder.totalQuantity() shouldBe 4
         }
 
         scenario("관리자는 토큰 정보를 통해 손님의 신원을 파악한다") {
@@ -74,19 +115,33 @@ class OrderSteps : FeatureSpec({
         }
 
         scenario("관리자는 주문한 물품의 재고가 충분한지 확인한다") {
-            // 재고 확인 로직 추가
-        }
+            // Given
+            val itemId = 1L
 
-        scenario("관리자는 결제 회사 직원이 업무 중인지 확인한다") {
-            // 결제 직원의 상태 확인
+            // When
+            val quantityEnough = ProductService(ProductFakeApi()).isProductQuantityEnough(itemId)
+
+            // Then
+            quantityEnough shouldBe true
         }
 
         scenario("관리자는 손님의 핸드폰 번호의 유효성을 검사한다") {
-            // 번호 유효성 검증 로직 추가
+            // Given When
+            val phoneNumber = PhoneNumber("01030202322")
+
+            // Then
+            phoneNumber.number shouldBe "01030202322"
         }
 
-        scenario("관리자는 손님의 배송 주소를 확인한다") {
-            // 배송 주소 검증 로직 추가
+        scenario("관리자는 손님의 배송지가 도서 산간 지역인지 확인한다") {
+            // Given
+            val postNum = "363"
+
+            // When
+            val sut = DeliveryService(DeliveryFakeApi()).isSurChargeArea(postNum)
+
+            // Then
+            sut shouldBe true
         }
 
         scenario("관리자는 주문 금액을 산출한다") {
