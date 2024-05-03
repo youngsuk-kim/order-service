@@ -94,23 +94,7 @@ class OrderSteps : FeatureSpec(
         feature("주문 준비 스텝") {
             scenario("점원이 관리자에게 주문을 요청한다") {
                 // Given
-                val orderItems =
-                    listOf(
-                        OrderItem(
-                            1L,
-                            "조던 덩크 하이",
-                            BigDecimal.valueOf(10_000),
-                            quantity = 3,
-                            price = BigDecimal.valueOf(100_000),
-                        ),
-                        OrderItem(
-                            1L,
-                            "아디다스 루이비통 스니커즈",
-                            BigDecimal.valueOf(24_000),
-                            quantity = 1,
-                            price = BigDecimal.valueOf(202_000),
-                        ),
-                    )
+                val orderItems = orderItems()
 
                 // When
                 val sut = Order.request(orderItems)
@@ -161,23 +145,7 @@ class OrderSteps : FeatureSpec(
             }
 
             scenario("관리자는 주문 금액을 산출한다") {
-                val orderItems =
-                    listOf(
-                        OrderItem(
-                            1L,
-                            "조던 덩크 하이",
-                            BigDecimal.valueOf(10_000),
-                            quantity = 3,
-                            price = BigDecimal.valueOf(100_000),
-                        ),
-                        OrderItem(
-                            1L,
-                            "아디다스 루이비통 스니커즈",
-                            BigDecimal.valueOf(24_000),
-                            quantity = 1,
-                            price = BigDecimal.valueOf(202_000),
-                        ),
-                    )
+                val orderItems = orderItems()
 
                 val requestOrder = Order.request(orderItems)
 
@@ -238,3 +206,21 @@ class OrderSteps : FeatureSpec(
         }
     },
 )
+
+private fun orderItems() =
+    listOf(
+        OrderItem(
+            id = 1L,
+            productName = "조던 덩크 하이",
+            productPrice = BigDecimal.valueOf(10_000),
+            quantity = 3,
+            price = BigDecimal.valueOf(100_000),
+        ),
+        OrderItem(
+            id = 1L,
+            productName = "아디다스 루이비통 스니커즈",
+            productPrice = BigDecimal.valueOf(24_000),
+            quantity = 1,
+            price = BigDecimal.valueOf(202_000),
+        ),
+    )
