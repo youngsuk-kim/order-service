@@ -2,8 +2,8 @@ package com.example.order
 
 import io.kotest.core.spec.style.FeatureSpec
 
-class CompleteOrderSteps : FeatureSpec(
-    {
+class CompleteOrderSteps :
+    FeatureSpec({
         feature("주문 완료 스텝") {
             scenario("시간 제한 주문이라면, 점원에게 주문 시간이 초과되었다고 알린다") {
                 // 시간 초과에 대한 알림 로직
@@ -37,5 +37,4 @@ class CompleteOrderSteps : FeatureSpec(
                 // 주문 완료 및 배송 정보 알림
             }
         }
-    },
-)
+    })
