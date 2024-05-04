@@ -1,5 +1,8 @@
 package com.example.order
 
+import com.example.order.domain.order.OrderCustomer
+import com.example.order.domain.payment.PaymentProduct
+import com.example.order.framework.InMemoryDatabase
 import io.kotest.core.spec.style.FeatureSpec
 import java.math.BigDecimal
 

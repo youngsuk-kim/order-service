@@ -1,4 +1,4 @@
-package com.example.order
+package com.example.order.framework
 
 interface InMemoryCrudRepository<ID, T> {
     fun save(entity: T): ID

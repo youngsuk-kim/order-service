@@ -1,4 +1,4 @@
-package com.example.order
+package com.example.order.domain.delivery
 
 class DeliveryService(
     private val deliveryApi: DeliveryApi,

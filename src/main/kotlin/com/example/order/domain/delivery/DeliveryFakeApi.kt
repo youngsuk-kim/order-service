@@ -1,4 +1,4 @@
-package com.example.order
+package com.example.order.domain.delivery
 
 class DeliveryFakeApi : DeliveryApi {
     override fun fetchSurChargeArea(): List<String> {

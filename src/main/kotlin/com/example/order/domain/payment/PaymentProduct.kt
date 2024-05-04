@@ -1,4 +1,4 @@
-package com.example.order
+package com.example.order.domain.payment
 
 import java.math.BigDecimal
 

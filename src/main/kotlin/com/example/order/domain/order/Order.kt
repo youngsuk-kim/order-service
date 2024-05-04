@@ -1,4 +1,4 @@
-package com.example.order
+package com.example.order.domain.order
 
 class Order(private val orderItems: List<OrderItem>) {
     companion object {

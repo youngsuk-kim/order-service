@@ -1,5 +1,16 @@
 package com.example.order
 
+import com.example.order.domain.auth.AuthFakeApi
+import com.example.order.domain.auth.AuthService
+import com.example.order.domain.common.PhoneNumber
+import com.example.order.domain.delivery.DeliveryFakeApi
+import com.example.order.domain.delivery.DeliveryService
+import com.example.order.domain.order.Order
+import com.example.order.domain.order.OrderCustomer
+import com.example.order.domain.order.OrderItem
+import com.example.order.domain.payment.PaymentCustomer
+import com.example.order.domain.product.ProductFakeApi
+import com.example.order.domain.product.ProductService
 import io.kotest.core.spec.style.FeatureSpec
 import io.kotest.matchers.shouldBe
 import java.math.BigDecimal
@@ -80,7 +91,7 @@ class PreOrderSteps : FeatureSpec(
                 )
 
                 // When
-                val sut = CustomerPayment.create(orderPay)
+                val sut = PaymentCustomer.create(orderPay)
 
                 // Then
                 with(sut) {

@@ -1,4 +1,4 @@
-package com.example.order
+package com.example.order.domain.common
 
 data class PhoneNumber(val number: String) {
     init {
