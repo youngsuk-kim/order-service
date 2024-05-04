@@ -1,17 +1,7 @@
-root = true
-
-[*]
-charset = utf-8
-end_of_line = lf
-indent_size = 4
-indent_style = space
-trim_trailing_whitespace = true
-insert_final_newline = true
-max_line_length = 120
-tab_width = 4
-
-[*.{kt,kts}]
-# java.* 패키지를 의존하는 경우  IntelliJ의 Orgarnize Import 기능으로는 알파벳 순서대로 import 구문을 정렬할 수 없다.
-# 이는 ktlint의 import-ordering 규칙과 맞지 않는다.
+[{*.kt,*.kts}]
+ktlint_code_style = INTELLIJ_IDEA
 ij_kotlin_allow_trailing_comma = true
 ij_kotlin_allow_trailing_comma_on_call_site = true
+ij_kotlin_name_count_to_use_star_import = 2147483647
+ij_kotlin_name_count_to_use_star_import_for_members = 2147483647
+ij_kotlin_packages_to_use_import_on_demand = unset
