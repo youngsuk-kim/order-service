@@ -26,8 +26,5 @@ WORKDIR /app
 # Copy the built jar file from the builder stage
 COPY --from=builder /app/build/libs/*.jar app.jar
 
-# Expose the application's port
-EXPOSE 8080
-
 # Run the application
 CMD ["java", "-jar", "app.jar"]
