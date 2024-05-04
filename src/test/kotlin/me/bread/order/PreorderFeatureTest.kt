@@ -1,18 +1,15 @@
 package me.bread.order
 
-import com.example.order.domain.delivery.DeliveryFakeApi
-import com.example.order.domain.delivery.DeliveryService
-import com.example.order.domain.order.Order
-import com.example.order.domain.order.OrderCustomer
-import com.example.order.domain.order.OrderItem
-import com.example.order.domain.payment.PaymentCustomer
-import com.example.order.domain.product.ProductFakeApi
-import com.example.order.domain.product.ProductService
 import io.kotest.core.spec.style.FeatureSpec
 import io.kotest.matchers.shouldBe
-import me.bread.order.domain.auth.AuthFakeApi
-import me.bread.order.domain.auth.AuthService
-import me.bread.order.domain.common.PhoneNumber
+import me.bread.order.domain.delivery.DeliveryFakeApi
+import me.bread.order.domain.delivery.DeliveryService
+import me.bread.order.domain.order.Order
+import me.bread.order.domain.order.OrderCustomer
+import me.bread.order.domain.order.OrderItem
+import me.bread.order.domain.payment.PaymentCustomer
+import me.bread.order.domain.product.ProductFakeApi
+import me.bread.order.domain.product.ProductService
 import java.math.BigDecimal
 
 class PreorderFeatureTest : FeatureSpec(

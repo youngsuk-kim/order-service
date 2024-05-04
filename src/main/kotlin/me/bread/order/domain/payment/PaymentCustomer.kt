@@ -1,6 +1,6 @@
 package me.bread.order.domain.payment
 
-import com.example.order.domain.order.OrderCustomer
+import me.bread.order.domain.order.OrderCustomer
 
 class PaymentCustomer(
     val id: Long? = null,
