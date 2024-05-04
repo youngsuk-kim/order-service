@@ -31,7 +31,10 @@ object InMemoryDatabase {
                 return store?.values?.map { it as T } ?: emptyList()
             }
 
-            override fun update(id: ID, entity: T): Boolean {
+            override fun update(
+                id: ID,
+                entity: T,
+            ): Boolean {
                 val store = dataStores[className] ?: return false
                 if (!store.containsKey(id)) return false
 

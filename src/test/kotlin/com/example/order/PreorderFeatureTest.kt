@@ -15,10 +15,10 @@ import io.kotest.core.spec.style.FeatureSpec
 import io.kotest.matchers.shouldBe
 import java.math.BigDecimal
 
-class PreOrderSteps : FeatureSpec(
+class PreorderFeatureTest : FeatureSpec(
     {
 
-        feature("주문 준비 스텝") {
+        feature("주문 준비") {
             scenario("점원이 관리자에게 주문을 요청한다") {
                 // Given
                 val orderItems = orderItems()
@@ -84,11 +84,12 @@ class PreOrderSteps : FeatureSpec(
 
             scenario("관리자는 결제 정보를 받아서 저장한다") {
                 // Given
-                val orderPay = OrderCustomer(
-                    orderId = 1L,
-                    customerEmail = "example@gmail.com",
-                    customerName = "김영석",
-                )
+                val orderPay =
+                    OrderCustomer(
+                        orderId = 1L,
+                        customerEmail = "example@gmail.com",
+                        customerName = "김영석",
+                    )
 
                 // When
                 val sut = PaymentCustomer.create(orderPay)

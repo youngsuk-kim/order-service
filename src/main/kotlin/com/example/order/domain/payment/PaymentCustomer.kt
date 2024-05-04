@@ -9,10 +9,11 @@ class PaymentCustomer(
     val customerName: String,
 ) {
     companion object {
-        fun create(orderCustomer: OrderCustomer) = PaymentCustomer(
-            orderId = orderCustomer.orderId,
-            customerEmail = orderCustomer.customerEmail,
-            customerName = orderCustomer.customerName,
-        )
+        fun create(orderCustomer: OrderCustomer) =
+            PaymentCustomer(
+                orderId = orderCustomer.orderId,
+                customerEmail = orderCustomer.customerEmail,
+                customerName = orderCustomer.customerName,
+            )
     }
 }
