@@ -1,15 +1,16 @@
-package me.bread.order
+package me.bread.order.usecase
 
 import io.kotest.core.spec.style.FeatureSpec
 import io.kotest.matchers.shouldBe
-import me.bread.order.domain.delivery.DeliveryFakeApi
 import me.bread.order.domain.delivery.DeliveryService
 import me.bread.order.domain.order.Order
 import me.bread.order.domain.order.OrderCustomer
-import me.bread.order.domain.order.OrderItem
 import me.bread.order.domain.payment.PaymentCustomer
-import me.bread.order.domain.product.ProductFakeApi
 import me.bread.order.domain.product.ProductService
+import me.bread.order.framework.AuthFakeApi
+import me.bread.order.framework.DeliveryFakeApi
+import me.bread.order.framework.ProductFakeApi
+import me.bread.order.orderItems
 import java.math.BigDecimal
 
 class PreorderFeatureTest : FeatureSpec(
@@ -33,7 +34,7 @@ class PreorderFeatureTest : FeatureSpec(
 
                 // When
                 val sut = me.bread.order.domain.auth.AuthService(
-                    me.bread.order.domain.auth.AuthFakeApi(),
+                    AuthFakeApi(),
                 )
                     .getCustomerId(token)
 
@@ -103,21 +104,4 @@ class PreorderFeatureTest : FeatureSpec(
             }
         }
     },
-)
-
-private fun orderItems() = listOf(
-    OrderItem(
-        id = 1L,
-        productName = "조던 덩크 하이",
-        productPrice = BigDecimal.valueOf(10_000),
-        quantity = 3,
-        price = BigDecimal.valueOf(100_000),
-    ),
-    OrderItem(
-        id = 1L,
-        productName = "아디다스 루이비통 스니커즈",
-        productPrice = BigDecimal.valueOf(24_000),
-        quantity = 1,
-        price = BigDecimal.valueOf(202_000),
-    ),
 )

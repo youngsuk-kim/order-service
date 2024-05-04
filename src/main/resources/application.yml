@@ -1,2 +1,12 @@
 server:
     port: 8099
+
+spring:
+    r2dbc:
+        url: r2dbc:h2:mem:///order;DB_CLOSE_DELAY=-1;MODE=MySQL
+        username: sa
+        password: ""
+    h2:
+        console:
+            enabled: true
+            path: /h2-console

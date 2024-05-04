@@ -7,7 +7,5 @@ class Order(private val orderItems: List<OrderItem>) {
 
     fun totalQuantity() = this.orderItems.sumOf { orderItem -> orderItem.quantity }
 
-    fun retrieveQuantity(id: Long) = this.orderItems.first { id == it.id }.quantity
-
     fun charge() = this.orderItems.sumOf { orderItem -> orderItem.price }
 }
