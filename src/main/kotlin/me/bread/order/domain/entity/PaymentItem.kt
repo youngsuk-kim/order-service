@@ -1,8 +1,8 @@
-package me.bread.order.domain.vo
+package me.bread.order.domain.entity
 
 import java.math.BigDecimal
 
-data class PaymentProduct(
+data class PaymentItem(
     val productId: Long,
     val name: String,
     val price: BigDecimal,

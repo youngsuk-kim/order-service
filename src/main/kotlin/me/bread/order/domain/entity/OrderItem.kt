@@ -7,5 +7,4 @@ class OrderItem(
     val productName: String,
     val productPrice: BigDecimal,
     val quantity: Long,
-    val price: BigDecimal,
 )

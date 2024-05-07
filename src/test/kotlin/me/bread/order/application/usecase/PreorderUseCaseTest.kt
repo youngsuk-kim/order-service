@@ -6,8 +6,7 @@ import me.bread.order.application.service.AuthService
 import me.bread.order.application.service.DeliveryService
 import me.bread.order.application.service.ProductService
 import me.bread.order.domain.entity.Order
-import me.bread.order.domain.entity.PaymentCustomer
-import me.bread.order.domain.vo.OrderCustomer
+import me.bread.order.domain.entity.Payment
 import me.bread.order.domain.vo.PhoneNumber
 import me.bread.order.infrastructure.external.AuthFakeApi
 import me.bread.order.infrastructure.external.DeliveryFakeApi
@@ -79,29 +78,22 @@ class PreorderUseCaseTest : FeatureSpec(
                 val charge = Order.request(orderItems).charge()
 
                 // Then
-                charge shouldBe BigDecimal(302_000)
+                charge shouldBe BigDecimal(34_000)
             }
 
             scenario("관리자는 결제 정보를 받아서 저장한다") {
                 // Given
-                val orderPay =
-                    OrderCustomer(
-                        orderId = 1L,
-                        customerEmail = "example@gmail.com",
-                        customerName = "김영석",
-                        customerPostalCode = "363",
-                        customerDestination = "땡땡 아파트 101동 1005호",
-                    )
+                val orderId = 1L
+                val customerName = "김영석"
+                val customerEmail = "example@gmail.com"
 
                 // When
-                val paymentCustomer = PaymentCustomer.create(orderPay)
+                val payment = Payment.create(orderId, customerEmail, customerName)
 
                 // Then
-                with(paymentCustomer) {
-                    orderId shouldBe 1L
-                    customerName shouldBe "김영석"
-                    customerEmail shouldBe "example@gmail.com"
-                }
+                orderId shouldBe 1L
+                customerName shouldBe "김영석"
+                customerEmail shouldBe "example@gmail.com"
             }
         }
     },

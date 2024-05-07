@@ -1,6 +1,6 @@
-package me.bread.order.domain.vo
+package me.bread.order.domain.entity
 
-data class OrderCustomer(
+data class Delivery(
     val orderId: Long,
     val customerEmail: String,
     val customerName: String,
