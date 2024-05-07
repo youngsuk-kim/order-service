@@ -15,7 +15,7 @@ class OrderController(
     @PostMapping("/api/orders/pre")
     fun preorder(@RequestBody request: PreorderRequest): RestResponse<Any> {
         preorderUseCase.execute(
-            customer = request.customer.toCustomer(),
+            token = request.token,
             orderItems = request.orderItems.map { it.toOrderItem() },
         )
 

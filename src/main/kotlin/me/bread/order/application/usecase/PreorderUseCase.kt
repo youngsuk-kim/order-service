@@ -1,6 +1,5 @@
 package me.bread.order.application.usecase
 
-import me.bread.order.application.model.Customer
 import me.bread.order.application.service.AuthService
 import me.bread.order.application.service.OrderService
 import me.bread.order.application.service.ProductService
@@ -13,9 +12,9 @@ class PreorderUseCase(
     private val orderService: OrderService,
     private val productService: ProductService,
 ) {
-    fun execute(customer: Customer, orderItems: List<OrderItem>) {
+    fun execute(token: String, orderItems: List<OrderItem>) {
         // 고객 여부 확인
-        authService.getCustomerId(customer.token)
+        authService.getCustomerId(token)
 
         // 상품 재고 확인
         productService.verifyStock(orderItems)
