@@ -1,4 +1,4 @@
-package me.bread.order.framework
+package me.bread.order.infrastructure.external
 
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders

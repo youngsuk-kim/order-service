@@ -2,18 +2,20 @@ package me.bread.order.usecase
 
 import io.kotest.core.spec.style.FeatureSpec
 import io.kotest.matchers.shouldBe
-import me.bread.order.domain.delivery.DeliveryService
-import me.bread.order.domain.order.Order
-import me.bread.order.domain.order.OrderCustomer
-import me.bread.order.domain.payment.PaymentCustomer
-import me.bread.order.domain.product.ProductService
-import me.bread.order.framework.AuthFakeApi
-import me.bread.order.framework.DeliveryFakeApi
-import me.bread.order.framework.ProductFakeApi
+import me.bread.order.application.service.AuthService
+import me.bread.order.application.service.DeliveryService
+import me.bread.order.application.service.ProductService
+import me.bread.order.domain.entity.Order
+import me.bread.order.domain.entity.PaymentCustomer
+import me.bread.order.domain.vo.OrderCustomer
+import me.bread.order.domain.vo.PhoneNumber
+import me.bread.order.infrastructure.external.AuthFakeApi
+import me.bread.order.infrastructure.external.DeliveryFakeApi
+import me.bread.order.infrastructure.external.ProductFakeApi
 import me.bread.order.orderItems
 import java.math.BigDecimal
 
-class PreorderFeatureTest : FeatureSpec(
+class PreorderUseCaseTest : FeatureSpec(
     {
 
         feature("주문 준비") {
@@ -33,7 +35,7 @@ class PreorderFeatureTest : FeatureSpec(
                 val token = "customer-token"
 
                 // When
-                val sut = me.bread.order.domain.auth.AuthService(
+                val sut = AuthService(
                     AuthFakeApi(),
                 )
                     .getCustomerId(token)
@@ -55,7 +57,7 @@ class PreorderFeatureTest : FeatureSpec(
 
             scenario("관리자는 손님의 핸드폰 번호의 유효성을 검사한다") {
                 // Given When
-                val sut = me.bread.order.domain.common.PhoneNumber("01030202322")
+                val sut = PhoneNumber("01030202322")
 
                 // Then
                 sut.number shouldBe "01030202322"
@@ -90,6 +92,8 @@ class PreorderFeatureTest : FeatureSpec(
                         orderId = 1L,
                         customerEmail = "example@gmail.com",
                         customerName = "김영석",
+                        customerPostalCode = "363",
+                        customerDestination = "땡땡 아파트 101동 1005호",
                     )
 
                 // When

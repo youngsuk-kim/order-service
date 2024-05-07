@@ -1,6 +1,6 @@
-package me.bread.order.domain.payment
+package me.bread.order.domain.entity
 
-import me.bread.order.domain.order.OrderCustomer
+import me.bread.order.domain.vo.OrderCustomer
 
 class PaymentCustomer(
     val id: Long? = null,

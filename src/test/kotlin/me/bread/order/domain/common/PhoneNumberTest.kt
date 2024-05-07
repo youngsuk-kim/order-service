@@ -3,6 +3,7 @@ package me.bread.order.domain.common
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FeatureSpec
 import io.kotest.matchers.shouldBe
+import me.bread.order.domain.vo.PhoneNumber
 
 class PhoneNumberTest : FeatureSpec(
     {

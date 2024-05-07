@@ -1,4 +1,4 @@
-package me.bread.order.domain.payment
+package me.bread.order.domain.entity
 
 data class Payment(
     val customerPaymentId: Long,

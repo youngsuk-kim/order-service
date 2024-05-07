@@ -1,6 +1,6 @@
-package me.bread.order.usecase
+package me.bread.order.application.usecase
 
-import me.bread.order.framework.MockPaymentApi
+import me.bread.order.infrastructure.external.MockPaymentApi
 import org.springframework.context.annotation.Profile
 import org.springframework.stereotype.Component
 

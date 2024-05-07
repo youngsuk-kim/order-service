@@ -1,6 +1,6 @@
 package me.bread.order
 
-import me.bread.order.domain.order.OrderItem
+import me.bread.order.domain.entity.OrderItem
 import java.math.BigDecimal
 
 fun orderItems() = listOf(

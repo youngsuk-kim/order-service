@@ -1,4 +1,4 @@
-package me.bread.order.domain.payment
+package me.bread.order.domain.vo
 
 import java.math.BigDecimal
 

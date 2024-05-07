@@ -1,4 +1,4 @@
-package me.bread.order.domain.common
+package me.bread.order.domain.vo
 
 data class PhoneNumber(val number: String) {
     init {

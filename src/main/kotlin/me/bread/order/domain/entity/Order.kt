@@ -1,4 +1,4 @@
-package me.bread.order.domain.order
+package me.bread.order.domain.entity
 
 class Order(private val orderItems: List<OrderItem>) {
     companion object {

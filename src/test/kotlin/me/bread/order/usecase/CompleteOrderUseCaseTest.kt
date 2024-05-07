@@ -2,7 +2,7 @@ package me.bread.order.usecase
 
 import io.kotest.core.spec.style.FeatureSpec
 
-class CompleteOrderFeatureTest :
+class CompleteOrderUseCaseTest :
     FeatureSpec({
         feature("주문 완료") {
             scenario("시간 제한 주문이라면, 점원에게 주문 시간이 초과되었다고 알린다") {
