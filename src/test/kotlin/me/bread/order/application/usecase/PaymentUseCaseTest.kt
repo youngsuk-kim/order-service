@@ -1,4 +1,4 @@
-package me.bread.order.usecase
+package me.bread.order.application.usecase
 
 import io.kotest.core.spec.style.FeatureSpec
 

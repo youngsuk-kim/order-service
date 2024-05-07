@@ -10,4 +10,7 @@ class OrderService {
     fun preorder(orderItem: List<OrderItem>) {
         Order.request(orderItem)
     }
+
+    fun calculateTotalCharge(surChargeArea: Boolean) {
+    }
 }
