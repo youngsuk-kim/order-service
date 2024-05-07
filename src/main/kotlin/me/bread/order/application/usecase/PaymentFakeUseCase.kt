@@ -1,10 +1,10 @@
 package me.bread.order.application.usecase
 
+import me.bread.order.application.annotation.Local
 import me.bread.order.infrastructure.external.MockPaymentApi
-import org.springframework.context.annotation.Profile
 import org.springframework.stereotype.Component
 
-@Profile("local", "local-dev")
+@Local
 @Component
 class PaymentFakeUseCase {
     fun execute() {
