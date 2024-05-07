@@ -15,17 +15,17 @@ repositories {
 }
 
 dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-webflux")
     testImplementation(kotlin("test"))
     testImplementation("io.kotest:kotest-assertions-core:$koTestVersion")
     testImplementation("io.kotest:kotest-runner-junit5:$koTestVersion")
 
-    implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
+    implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 
     implementation("io.asyncer:r2dbc-mysql:1.1.0")

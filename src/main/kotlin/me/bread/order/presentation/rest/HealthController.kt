@@ -1,4 +1,4 @@
-package me.bread.order.presentation.controller.rest
+package me.bread.order.presentation.rest
 
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping

@@ -1,4 +1,4 @@
-package me.bread.order.presentation.controller.rest
+package me.bread.order.presentation.rest
 
 import me.bread.order.presentation.support.error.ErrorType
 import me.bread.order.presentation.support.error.RestException
